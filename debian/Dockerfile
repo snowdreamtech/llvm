@@ -1,5 +1,4 @@
-# FROM snowdreamtech/debian:12.8.0
-FROM debian:12.8-slim
+FROM snowdreamtech/debian:12.8.0
 
 # OCI annotations to image
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
