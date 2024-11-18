@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+# update alternatives 
+update-alternatives-llvm.sh  "${LLVM_VERSION}" 100  >/dev/null 2>&1
+
 # exec commands
 if [ -n "$*" ]; then
     sh -c "$*"
