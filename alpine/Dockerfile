@@ -16,7 +16,16 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 ENV KEEPALIVE=1
 
 RUN apk add --no-cache \
-    vim
+    clang18 \
+    clang18-dev \
+    llvm18 \
+    llvm18-dev \
+    lld \
+    musl-dev \
+    compiler-rt \
+    cmake \
+    ninja \
+    python3
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
