@@ -23,6 +23,10 @@ RUN set -eux \
     wget  \
     software-properties-common \
     gnupg2 \
+    lld \
+    cmake \
+    ninja-build \
+    python3 \
     && apt-get -qqy --purge autoremove \
     && apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \
