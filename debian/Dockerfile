@@ -34,7 +34,7 @@ RUN apt-get -y install lldb-${LLVM_VERSION}
 #  lld (linker)
 RUN apt-get -y install lld-${LLVM_VERSION}
 #  libc++
-# RUN apt-get -y install libc++-${LLVM_VERSION}-dev libc++abi-${LLVM_VERSION}-dev
+RUN apt-get -y install libc++-${LLVM_VERSION}-dev libc++abi-${LLVM_VERSION}-dev
 #  OpenMP
 # RUN apt-get -y install libomp-${LLVM_VERSION}-dev
 #  libclc
