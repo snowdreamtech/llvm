@@ -12,11 +12,15 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.version="12.8" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/llvm"
 
+# Define an argument for the platform 
+ARG TARGETPLATFORM
+    
 # keep the docker container running
 ENV KEEPALIVE=1 \
     LLVM_VERSION=14
 
 RUN set -eux \  
+    && echo ${TARGETPLATFORM} \
     && apt-get -y update
 
 # LLVM
