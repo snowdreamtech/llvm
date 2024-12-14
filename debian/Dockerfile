@@ -17,7 +17,7 @@ ARG TARGETPLATFORM
 
 # keep the docker container running
 ENV KEEPALIVE=1 \
-    LLVM_VERSION=14
+    LLVM_VERSION=16
 
 RUN set -eux \  
     && echo ${TARGETPLATFORM} \
