@@ -14,7 +14,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
 
 # Define an argument for the platform 
 ARG TARGETPLATFORM
-    
+
 # keep the docker container running
 ENV KEEPALIVE=1 \
     LLVM_VERSION=14
@@ -34,7 +34,9 @@ RUN apt-get -y install libclang-rt-${LLVM_VERSION}-dev
 #  libfuzzer
 # RUN apt-get -y install libfuzzer-${LLVM_VERSION}-dev
 #  lldb
-RUN apt-get -y install lldb-${LLVM_VERSION}
+RUN if [ "$TARGETPLATFORM" != "linux/mips64le" ]; then \
+        apt-get -y install lldb-${LLVM_VERSION}; \
+    fi
 #  lld (linker)
 RUN apt-get -y install lld-${LLVM_VERSION}
 #  libc++
