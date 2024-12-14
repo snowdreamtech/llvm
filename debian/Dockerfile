@@ -30,9 +30,9 @@ RUN apt-get -y install clang-${LLVM_VERSION} clang-tools-${LLVM_VERSION} clang-$
 #  compiler-rt
 RUN apt-get -y install libclang-rt-${LLVM_VERSION}-dev
 #  polly
-# RUN apt-get -y install libpolly-${LLVM_VERSION}-dev
+RUN apt-get -y install libpolly-${LLVM_VERSION}-dev
 #  libfuzzer
-# RUN apt-get -y install libfuzzer-${LLVM_VERSION}-dev
+RUN apt-get -y install libfuzzer-${LLVM_VERSION}-dev
 #  lldb
 RUN if [ "$TARGETPLATFORM" != "linux/mips64le" ]; then \
         apt-get -y install lldb-${LLVM_VERSION}; \
@@ -42,19 +42,27 @@ RUN apt-get -y install lld-${LLVM_VERSION}
 #  libc++
 RUN apt-get -y install libc++-${LLVM_VERSION}-dev libc++abi-${LLVM_VERSION}-dev
 #  OpenMP
-# RUN apt-get -y install libomp-${LLVM_VERSION}-dev
+RUN if [ "$TARGETPLATFORM" != "linux/arm/v5" ] && [ "$TARGETPLATFORM" != "linux/s390x" ]; then \
+        apt-get -y install libomp-${LLVM_VERSION}-dev; \
+    fi
 #  libclc
-# RUN apt-get -y install libclc-${LLVM_VERSION}-dev
+RUN apt-get -y install libclc-${LLVM_VERSION}-dev
 #  libunwind
-# RUN apt-get -y install libunwind-${LLVM_VERSION}-dev
+RUN if [ "$TARGETPLATFORM" != "linux/arm/v5" ] && [ "$TARGETPLATFORM" != "linux/mips64le" ] && [ "$TARGETPLATFORM" != "linux/s390x" ]; then \
+        apt-get -y install libunwind-${LLVM_VERSION}-dev; \
+    fi
 #  mlir
-# RUN apt-get -y install libmlir-${LLVM_VERSION}-dev mlir-${LLVM_VERSION}-tools
+RUN apt-get -y install libmlir-${LLVM_VERSION}-dev mlir-${LLVM_VERSION}-tools
 #  bolt
-# RUN apt-get -y install libbolt-${LLVM_VERSION}-dev bolt-${LLVM_VERSION}
+RUN if [ "$TARGETPLATFORM" == "linux/amd64" ]; then \
+        apt-get -y install libbolt-${LLVM_VERSION}-dev bolt-${LLVM_VERSION}; \
+    fi
 #  flang
-# RUN apt-get -y install flang-${LLVM_VERSION}
+RUN if [ "$TARGETPLATFORM" == "linux/amd64" ] || [ "$TARGETPLATFORM" == "linux/arm64" ] || [ "$TARGETPLATFORM" == "linux/mips64el" ] || [ "$TARGETPLATFORM" == "linux/ppc64el" ]; then \
+        apt-get -y install flang-${LLVM_VERSION}; \
+    fi
 #  wasm support
-# RUN apt-get -y install libclang-rt-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm64 libc++-${LLVM_VERSION}-dev-wasm32 libc++abi-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm64
+RUN apt-get -y install libclang-rt-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm64 libc++-${LLVM_VERSION}-dev-wasm32 libc++abi-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm32 libclang-rt-${LLVM_VERSION}-dev-wasm64
 
 RUN apt-get -y --purge autoremove \
     && apt-get -y clean \
