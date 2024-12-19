@@ -19,6 +19,24 @@ ARG TARGETPLATFORM
 ENV KEEPALIVE=1 \
     LLVM_VERSION=16
 
+ARG GID=1000 \
+    UID=1000  \
+    USER=llvm \
+    WORKDIR=/home/llvm
+
+# Create a user with UID and GID
+RUN set -eux \
+    &&if [ "${USER}" != "root" ]; then \
+    addgroup --gid ${GID} ${USER}; \
+    adduser --home /home/${USER} --uid ${UID} --gid ${GID} --gecos ${USER} --shell /bin/bash --disabled-password ${USER}; \
+    # sed -i "/%sudo/c ${USER} ALL=(ALL:ALL) NOPASSWD:ALL" /etc/sudoers; \
+    fi \
+    && apt-get -qqy --purge autoremove \
+    && apt-get -qqy clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
+    && rm -rf /var/tmp/* 
+
 RUN set -eux \  
     && echo ${TARGETPLATFORM} \
     && apt-get -y update
@@ -69,6 +87,12 @@ RUN apt-get -y --purge autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/* \
     && rm -rf /var/tmp/*
+
+# Switch to the user
+USER ${USER}
+
+# Set the workdir
+WORKDIR ${WORKDIR}
 
 COPY update-alternatives-llvm.sh docker-entrypoint.sh /usr/local/bin/
 

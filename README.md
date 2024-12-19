@@ -14,7 +14,7 @@ To help you get started creating a container from this image you can either use 
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=llvm \
   -e TZ=Asia/Shanghai \
   --restart unless-stopped \
   snowdreamtech/llvm:latest
@@ -24,7 +24,7 @@ docker run -d \
 
 ```bash
 docker run -d \
-  --name=base \
+  --name=llvm \
   -e TZ=Asia/Shanghai \
   -v /path/to/data:/path/to/data \
   --restart unless-stopped \
@@ -36,12 +36,10 @@ docker run -d \
 ### Simple
 
 ```bash
-version: "3"
-
 services:
-  base:
+  llvm:
     image: snowdreamtech/llvm:latest
-    container_name: base
+    container_name: llvm
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
@@ -50,12 +48,10 @@ services:
 ### Advance
 
 ```bash
-version: "3"
-
 services:
-  base:
+  llvm:
     image: snowdreamtech/llvm:latest
-    container_name: base
+    container_name: llvm
     environment:
       - TZ=Asia/Shanghai
     volumes:
@@ -79,7 +75,7 @@ docker buildx build -t snowdreamtech/llvm --platform=linux/386,linux/amd64,linux
 1. [Faster Multi-Platform Builds: Dockerfile Cross-Compilation Guide](https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/)
 1. [docker/buildx](https://github.com/docker/buildx)
 
-## Contact (备注：base)
+## Contact (备注：llvm)
 
 * Email: sn0wdr1am@qq.com
 * QQ: 3217680847
