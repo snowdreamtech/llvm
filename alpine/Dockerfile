@@ -32,7 +32,7 @@ RUN apk add --no-cache \
     clang18-dev \
     llvm18 \
     llvm18-dev \
-    lld \
+    # lld \
     musl-dev \
     compiler-rt \
     cmake \
