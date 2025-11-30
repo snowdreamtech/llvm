@@ -6,18 +6,18 @@
 if [ "$DEBUG" = "true" ]; then echo "→ [llvm] Updating alternatives"; fi
 
 update_alternatives() {
-    local version=${1}
-    local priority=${2}
-    local master=${3}
-    local slaves=${4}
-    local path=${5}
+    local version="${1}"
+    local priority="${2}"
+    local master="${3}"
+    local slaves="${4}"
+    local path="${5}"
     local cmdln
 
     cmdln="--verbose --install ${path}${master} ${master} ${path}${master}-${version} ${priority}"
     for slave in ${slaves}; do
         cmdln="${cmdln} --slave ${path}${slave} ${slave} ${path}${slave}-${version}"
     done
-     update-alternatives ${cmdln}
+     update-alternatives "${cmdln}"
 }
 
 update_alternatives_for_llvm() {
@@ -26,8 +26,8 @@ update_alternatives_for_llvm() {
         exit 1
     fi
 
-    version=${1}
-    priority=${2}
+    version="${1}"
+    priority="${2}"
     path="/usr/bin/"
 
     #  apt update
@@ -66,6 +66,8 @@ update_alternatives_for_llvm() {
 }
 
 # update alternatives 
-update_alternatives_for_llvm "${LLVM_VERSION}" 100  >/dev/null 2>&1
+if [ -n "${LLVM_VERSION}" ]; then
+    update_alternatives_for_llvm "${LLVM_VERSION}" 100
+fi
 
 if [ "$DEBUG" = "true" ]; then echo "→ [llvm] Done."; fi    
