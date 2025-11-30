@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/llvm" \
     org.opencontainers.image.vendor="Snowdream Tech" \
-    org.opencontainers.image.version="13.1.0" \
+    org.opencontainers.image.version="17.0.6" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/llvm"
 
 # Switch to the user
@@ -53,15 +53,14 @@ ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \
     USER=${USER} \
     WORKDIR=${WORKDIR} 
 
-ENV LLVM_VERSION=16
+ENV LLVM_VERSION=17
 
 # Create a user with PUID and PGID
 RUN if [ "${USER}" != "root" ] && [ ! -d "/home/${USER}" ] && [ "${PUID}" -ne 0 ] && [ "${PGID}" -ne 0 ]; then \
     addgroup --gid ${PGID} ${USER}; \
     adduser --home /home/${USER} --uid ${PUID} --gid ${PGID} --gecos ${USER} --shell /bin/bash --disabled-password ${USER}; \
     # sed -i "/%sudo/c ${USER} ALL=(ALL:ALL) NOPASSWD:ALL" /etc/sudoers; \
-    fi
-    
+    fi   
 
 RUN set -eux \  
     && echo ${TARGETPLATFORM} \
