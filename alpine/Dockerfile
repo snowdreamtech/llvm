@@ -9,7 +9,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/llvm" \
     org.opencontainers.image.vendor="Snowdream Tech" \
-    org.opencontainers.image.version="15.0.7" \
+    org.opencontainers.image.version="16.0.6" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/llvm"
     
 # Switch to the user
@@ -57,10 +57,10 @@ RUN if [ "${USER}" != "root" ] && [ ! -d "/home/${USER}" ] && [ "${PUID}" -ne 0 
 
 RUN apk update \
     && apk add --no-cache \
-    clang15 \
-    clang15-dev \
-    llvm15 \
-    llvm15-dev \
+    clang16 \
+    clang16-dev \
+    llvm16 \
+    llvm16-dev \
     # lld \
     musl-dev \
     compiler-rt \
