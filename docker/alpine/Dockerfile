@@ -16,11 +16,8 @@ ARG BUILDTIME \
     PGID=0 \
     PUID=0 \
     USER=root \
-    WORKDIR=/root
-
-# x-release-please-start-version
-ARG LLVM_VERSION=19.1.0
-# x-release-please-end
+    WORKDIR=/root \
+    LLVM_VERSION=22.1.3-r0
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -54,20 +51,21 @@ ENV KEEPALIVE=${KEEPALIVE} \
 
 # Additional tooling and configuration for LLVM image
 RUN apk update \
+    && LLVM_BASE_VERSION=$(echo ${LLVM_VERSION} | cut -d- -f1) \
     && apk add --no-cache \
-    llvm \
-    clang \
-    clang-extra-tools \
-    clang-dev \
-    clang-static \
+    "llvm=~${LLVM_BASE_VERSION}" \
+    "clang=~${LLVM_BASE_VERSION}" \
+    "clang-extra-tools=~${LLVM_BASE_VERSION}" \
+    "clang-dev=~${LLVM_BASE_VERSION}" \
+    "clang-static=~${LLVM_BASE_VERSION}" \
     lld \
     lldb \
-    compiler-rt \
-    libc++ \
-    libc++-dev \
-    libc++-static \
-    llvm-dev \
-    llvm-static \
+    "compiler-rt=~${LLVM_BASE_VERSION}" \
+    "libc++=~${LLVM_BASE_VERSION}" \
+    "libc++-dev=~${LLVM_BASE_VERSION}" \
+    "libc++-static=~${LLVM_BASE_VERSION}" \
+    "llvm-dev=~${LLVM_BASE_VERSION}" \
+    "llvm-static=~${LLVM_BASE_VERSION}" \
     lld-dev \
     lldb-dev \
     cmake \
