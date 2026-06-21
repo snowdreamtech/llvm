@@ -16,8 +16,11 @@ ARG BUILDTIME \
     PGID=0 \
     PUID=0 \
     USER=root \
-    WORKDIR=/root \
-    LLVM_VERSION=22.1.3-r0
+    WORKDIR=/root
+
+# x-release-please-start-version
+ARG LLVM_VERSION=22.1.3
+# x-release-please-end
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -51,21 +54,21 @@ ENV KEEPALIVE=${KEEPALIVE} \
 
 # Additional tooling and configuration for LLVM image
 RUN apk update \
-    && LLVM_BASE_VERSION=$(echo ${LLVM_VERSION} | cut -d- -f1) \
+    && LLVM_MAJOR_VERSION=$(echo ${LLVM_VERSION} | cut -d. -f1) \
     && apk add --no-cache \
-    "llvm=~${LLVM_BASE_VERSION}" \
-    "clang=~${LLVM_BASE_VERSION}" \
-    "clang-extra-tools=~${LLVM_BASE_VERSION}" \
-    "clang-dev=~${LLVM_BASE_VERSION}" \
-    "clang-static=~${LLVM_BASE_VERSION}" \
+    "llvm=~${LLVM_MAJOR_VERSION}" \
+    "clang=~${LLVM_MAJOR_VERSION}" \
+    "clang-extra-tools=~${LLVM_MAJOR_VERSION}" \
+    "clang-dev=~${LLVM_MAJOR_VERSION}" \
+    "clang-static=~${LLVM_MAJOR_VERSION}" \
     lld \
     lldb \
-    "compiler-rt=~${LLVM_BASE_VERSION}" \
-    "libc++=~${LLVM_BASE_VERSION}" \
-    "libc++-dev=~${LLVM_BASE_VERSION}" \
-    "libc++-static=~${LLVM_BASE_VERSION}" \
-    "llvm-dev=~${LLVM_BASE_VERSION}" \
-    "llvm-static=~${LLVM_BASE_VERSION}" \
+    "compiler-rt=~${LLVM_MAJOR_VERSION}" \
+    "libc++=~${LLVM_MAJOR_VERSION}" \
+    "libc++-dev=~${LLVM_MAJOR_VERSION}" \
+    "libc++-static=~${LLVM_MAJOR_VERSION}" \
+    "llvm-dev=~${LLVM_MAJOR_VERSION}" \
+    "llvm-static=~${LLVM_MAJOR_VERSION}" \
     lld-dev \
     lldb-dev \
     cmake \
@@ -109,10 +112,6 @@ RUN apk update \
     readline-dev \
     libffi-dev \
     sqlite-dev \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
     linux-headers \
     elfutils-dev \
     coreutils \
@@ -122,13 +121,14 @@ RUN apk update \
     fakeroot \
     texinfo \
     expat-dev \
-    nasm \
-    yasm \
     swig \
     gperf \
     bzip2-dev \
     xz-dev \
-    zstd-dev
+    zstd-dev \
+    && for pkg in gdb strace valgrind ltrace nasm yasm; do \
+        apk add --no-cache $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done
 
 # Container Orchestration Files
 COPY entrypoint.d /usr/local/bin/entrypoint.d

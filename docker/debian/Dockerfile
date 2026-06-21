@@ -17,8 +17,11 @@ ARG BUILDTIME \
     PGID=0 \
     PUID=0 \
     USER=root \
-    WORKDIR=/root \
-    LLVM_VERSION=1:19.1.7-3
+    WORKDIR=/root
+
+# x-release-please-start-version
+ARG LLVM_VERSION=19.1.7
+# x-release-please-end
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -53,21 +56,21 @@ ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \
 
 # Additional tooling and configuration for LLVM image
 RUN set -eux \
-    && LLVM_MAJOR_VERSION=$(echo ${LLVM_VERSION} | grep -oE '[0-9]+' | head -n 2 | tail -n 1) \
+    && LLVM_MAJOR_VERSION=$(echo ${LLVM_VERSION} | grep -oE '[0-9]+' | head -n 1) \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy update \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends \
-    "llvm-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "clang-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "clang-tools-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "clang-tidy-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "clang-format-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "lld-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "lldb-${LLVM_MAJOR_VERSION}=${LLVM_VERSION}" \
-    "libc++-${LLVM_MAJOR_VERSION}-dev=${LLVM_VERSION}" \
-    "libc++abi-${LLVM_MAJOR_VERSION}-dev=${LLVM_VERSION}" \
-    "libomp-${LLVM_MAJOR_VERSION}-dev=${LLVM_VERSION}" \
-    "llvm-${LLVM_MAJOR_VERSION}-dev=${LLVM_VERSION}" \
-    "libclang-${LLVM_MAJOR_VERSION}-dev=${LLVM_VERSION}" \
+    "llvm-${LLVM_MAJOR_VERSION}" \
+    "clang-${LLVM_MAJOR_VERSION}" \
+    "clang-tools-${LLVM_MAJOR_VERSION}" \
+    "clang-tidy-${LLVM_MAJOR_VERSION}" \
+    "clang-format-${LLVM_MAJOR_VERSION}" \
+    "lld-${LLVM_MAJOR_VERSION}" \
+    "lldb-${LLVM_MAJOR_VERSION}" \
+    "libc++-${LLVM_MAJOR_VERSION}-dev" \
+    "libc++abi-${LLVM_MAJOR_VERSION}-dev" \
+    "libomp-${LLVM_MAJOR_VERSION}-dev" \
+    "llvm-${LLVM_MAJOR_VERSION}-dev" \
+    "libclang-${LLVM_MAJOR_VERSION}-dev" \
     build-essential \
     cmake \
     ninja-build \
