@@ -5,7 +5,7 @@
       "release-type": "simple",
       "component": "alpine",
       "include-component-in-tag": true,
-      "release-as": "19.1.0",
+      "release-as": "22.1.3",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/alpine/CHANGELOG.md"],
       "extra-files": [
@@ -20,7 +20,7 @@
       "release-type": "simple",
       "component": "debian",
       "include-component-in-tag": true,
-      "release-as": "19.1.0",
+      "release-as": "19.1.7",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/debian/CHANGELOG.md"],
       "extra-files": [
@@ -35,7 +35,7 @@
       "release-type": "simple",
       "component": "rocky",
       "include-component-in-tag": true,
-      "release-as": "19.1.0",
+      "release-as": "21.1.8",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/rocky/CHANGELOG.md"],
       "extra-files": [

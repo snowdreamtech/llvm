@@ -34,7 +34,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/llvm"
 
 # x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-19.1.0}"
+LABEL org.opencontainers.image.version="${VERSION:-19.1.7}"
 # x-release-please-end
 
 # Runtime Environment Configuration
