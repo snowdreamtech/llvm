@@ -16,11 +16,8 @@ ARG BUILDTIME \
     PGID=0 \
     PUID=0 \
     USER=root \
-    WORKDIR=/root
-
-# x-release-please-start-version
-ARG LLVM_VERSION=19.1.0
-# x-release-please-end
+    WORKDIR=/root \
+    LLVM_VERSION=21.1.8
 
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
@@ -59,15 +56,15 @@ RUN set -eux \
     && dnf -y config-manager --set-enabled crb \
     && dnf makecache \
     && dnf -y install \
-    llvm \
-    clang \
-    clang-tools-extra \
-    lld \
-    lldb \
-    compiler-rt \
-    libcxx-devel \
-    llvm-devel \
-    clang-devel \
+    "llvm-${LLVM_VERSION}*" \
+    "clang-${LLVM_VERSION}*" \
+    "clang-tools-extra-${LLVM_VERSION}*" \
+    "lld-${LLVM_VERSION}*" \
+    "lldb-${LLVM_VERSION}*" \
+    "compiler-rt-${LLVM_VERSION}*" \
+    "libcxx-devel-${LLVM_VERSION}*" \
+    "llvm-devel-${LLVM_VERSION}*" \
+    "clang-devel-${LLVM_VERSION}*" \
     cmake \
     ninja-build \
     make \
