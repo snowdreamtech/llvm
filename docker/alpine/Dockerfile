@@ -62,7 +62,6 @@ RUN apk update \
     "clang-dev=~${LLVM_MAJOR_VERSION}" \
     "clang-static=~${LLVM_MAJOR_VERSION}" \
     lld \
-    lldb \
     "compiler-rt=~${LLVM_MAJOR_VERSION}" \
     "libc++=~${LLVM_MAJOR_VERSION}" \
     "libc++-dev=~${LLVM_MAJOR_VERSION}" \
@@ -70,7 +69,6 @@ RUN apk update \
     "llvm-dev=~${LLVM_MAJOR_VERSION}" \
     "llvm-static=~${LLVM_MAJOR_VERSION}" \
     lld-dev \
-    lldb-dev \
     cmake \
     samurai \
     pkgconf \
@@ -113,7 +111,6 @@ RUN apk update \
     libffi-dev \
     sqlite-dev \
     linux-headers \
-    elfutils-dev \
     coreutils \
     findutils \
     diffutils \
@@ -126,7 +123,7 @@ RUN apk update \
     bzip2-dev \
     xz-dev \
     zstd-dev \
-    && for pkg in gdb strace valgrind ltrace nasm yasm; do \
+    && for pkg in gdb strace valgrind ltrace elfutils-dev nasm yasm lldb lldb-dev; do \
         apk add --no-cache $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done
 

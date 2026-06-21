@@ -65,7 +65,6 @@ RUN set -eux \
     "clang-tidy-${LLVM_MAJOR_VERSION}" \
     "clang-format-${LLVM_MAJOR_VERSION}" \
     "lld-${LLVM_MAJOR_VERSION}" \
-    "lldb-${LLVM_MAJOR_VERSION}" \
     "libc++-${LLVM_MAJOR_VERSION}-dev" \
     "libc++abi-${LLVM_MAJOR_VERSION}-dev" \
     "libomp-${LLVM_MAJOR_VERSION}-dev" \
@@ -114,22 +113,18 @@ RUN set -eux \
     libreadline-dev \
     libffi-dev \
     libsqlite3-dev \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
-    libelf-dev \
     sudo \
     fakeroot \
     texinfo \
     libexpat1-dev \
-    nasm \
-    yasm \
     swig \
     gperf \
     libbz2-dev \
     liblzma-dev \
     libzstd-dev \
+    && for pkg in "lldb-${LLVM_MAJOR_VERSION}" gdb strace valgrind ltrace libelf-dev nasm yasm; do \
+        DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy --purge autoremove \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy clean \
     && rm -rf /var/lib/apt/lists/* \

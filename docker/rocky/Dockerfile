@@ -63,7 +63,6 @@ RUN set -eux \
     "clang-${LLVM_VERSION}*" \
     "clang-tools-extra-${LLVM_VERSION}*" \
     "lld-${LLVM_VERSION}*" \
-    "lldb-${LLVM_VERSION}*" \
     "compiler-rt-${LLVM_VERSION}*" \
     "libcxx-devel-${LLVM_VERSION}*" \
     "llvm-devel-${LLVM_VERSION}*" \
@@ -111,11 +110,6 @@ RUN set -eux \
     readline-devel \
     libffi-devel \
     sqlite-devel \
-    gdb \
-    strace \
-    valgrind \
-    ltrace \
-    elfutils-devel \
     coreutils \
     findutils \
     diffutils \
@@ -123,13 +117,14 @@ RUN set -eux \
     fakeroot \
     texinfo \
     expat-devel \
-    nasm \
-    yasm \
     swig \
     gperf \
     bzip2-devel \
     xz-devel \
     libzstd-devel \
+    && for pkg in "lldb-${LLVM_VERSION}*" gdb strace valgrind ltrace elfutils-devel nasm yasm; do \
+        dnf -y install $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+    done \
     && dnf clean all \
     && rm -rf /var/cache/dnf \
     && rm -rf /tmp/* \
