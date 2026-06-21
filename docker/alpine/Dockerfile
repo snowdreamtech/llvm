@@ -58,20 +58,10 @@ RUN apk update \
     && apk add --no-cache \
     "llvm=~${LLVM_MAJOR_VERSION}" \
     "clang=~${LLVM_MAJOR_VERSION}" \
-    "clang-extra-tools=~${LLVM_MAJOR_VERSION}" \
-    "clang-dev=~${LLVM_MAJOR_VERSION}" \
-    "clang-static=~${LLVM_MAJOR_VERSION}" \
-    lld \
-    "compiler-rt=~${LLVM_MAJOR_VERSION}" \
-    "libc++=~${LLVM_MAJOR_VERSION}" \
-    "libc++-dev=~${LLVM_MAJOR_VERSION}" \
-    "libc++-static=~${LLVM_MAJOR_VERSION}" \
-    "llvm-dev=~${LLVM_MAJOR_VERSION}" \
-    "llvm-static=~${LLVM_MAJOR_VERSION}" \
-    lld-dev \
     cmake \
     samurai \
     pkgconf \
+    git \
     curl \
     wget \
     unzip \
@@ -111,6 +101,7 @@ RUN apk update \
     libffi-dev \
     sqlite-dev \
     linux-headers \
+    gfortran \
     coreutils \
     findutils \
     diffutils \
@@ -123,7 +114,7 @@ RUN apk update \
     bzip2-dev \
     xz-dev \
     zstd-dev \
-    && for pkg in gdb strace valgrind ltrace elfutils-dev nasm yasm lldb lldb-dev; do \
+    && for pkg in "clang-tools-extra=~${LLVM_MAJOR_VERSION}" "clang-dev=~${LLVM_MAJOR_VERSION}" "clang-static=~${LLVM_MAJOR_VERSION}" lld "compiler-rt=~${LLVM_MAJOR_VERSION}" "libc++=~${LLVM_MAJOR_VERSION}" "libc++-dev=~${LLVM_MAJOR_VERSION}" "libc++-static=~${LLVM_MAJOR_VERSION}" "llvm-dev=~${LLVM_MAJOR_VERSION}" "llvm-static=~${LLVM_MAJOR_VERSION}" lld-dev gdb strace valgrind ltrace elfutils-dev nasm yasm lldb lldb-dev; do \
         apk add --no-cache $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done
 

@@ -61,15 +61,6 @@ RUN set -eux \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends \
     "llvm-${LLVM_MAJOR_VERSION}" \
     "clang-${LLVM_MAJOR_VERSION}" \
-    "clang-tools-${LLVM_MAJOR_VERSION}" \
-    "clang-tidy-${LLVM_MAJOR_VERSION}" \
-    "clang-format-${LLVM_MAJOR_VERSION}" \
-    "lld-${LLVM_MAJOR_VERSION}" \
-    "libc++-${LLVM_MAJOR_VERSION}-dev" \
-    "libc++abi-${LLVM_MAJOR_VERSION}-dev" \
-    "libomp-${LLVM_MAJOR_VERSION}-dev" \
-    "llvm-${LLVM_MAJOR_VERSION}-dev" \
-    "libclang-${LLVM_MAJOR_VERSION}-dev" \
     build-essential \
     cmake \
     ninja-build \
@@ -113,6 +104,7 @@ RUN set -eux \
     libreadline-dev \
     libffi-dev \
     libsqlite3-dev \
+    gfortran \
     sudo \
     fakeroot \
     texinfo \
@@ -122,7 +114,7 @@ RUN set -eux \
     libbz2-dev \
     liblzma-dev \
     libzstd-dev \
-    && for pkg in "lldb-${LLVM_MAJOR_VERSION}" gdb strace valgrind ltrace libelf-dev nasm yasm; do \
+    && for pkg in "clang-tools-${LLVM_MAJOR_VERSION}" "clang-tidy-${LLVM_MAJOR_VERSION}" "clang-format-${LLVM_MAJOR_VERSION}" "lld-${LLVM_MAJOR_VERSION}" "libc++-${LLVM_MAJOR_VERSION}-dev" "libc++abi-${LLVM_MAJOR_VERSION}-dev" "libomp-${LLVM_MAJOR_VERSION}-dev" "llvm-${LLVM_MAJOR_VERSION}-dev" "libclang-${LLVM_MAJOR_VERSION}-dev" "lldb-${LLVM_MAJOR_VERSION}" gdb strace valgrind ltrace libelf-dev nasm yasm; do \
         DEBIAN_FRONTEND=noninteractive apt-get -qqy install --no-install-recommends $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done \
     && DEBIAN_FRONTEND=noninteractive apt-get -qqy --purge autoremove \

@@ -61,12 +61,6 @@ RUN set -eux \
     && dnf -y install \
     "llvm-${LLVM_VERSION}*" \
     "clang-${LLVM_VERSION}*" \
-    "clang-tools-extra-${LLVM_VERSION}*" \
-    "lld-${LLVM_VERSION}*" \
-    "compiler-rt-${LLVM_VERSION}*" \
-    "libcxx-devel-${LLVM_VERSION}*" \
-    "llvm-devel-${LLVM_VERSION}*" \
-    "clang-devel-${LLVM_VERSION}*" \
     cmake \
     ninja-build \
     make \
@@ -113,6 +107,7 @@ RUN set -eux \
     coreutils \
     findutils \
     diffutils \
+    gcc-gfortran \
     sudo \
     fakeroot \
     texinfo \
@@ -122,7 +117,7 @@ RUN set -eux \
     bzip2-devel \
     xz-devel \
     libzstd-devel \
-    && for pkg in "lldb-${LLVM_VERSION}*" gdb strace valgrind ltrace elfutils-devel nasm yasm; do \
+    && for pkg in "clang-tools-extra-${LLVM_VERSION}*" "lld-${LLVM_VERSION}*" "compiler-rt-${LLVM_VERSION}*" "libcxx-devel-${LLVM_VERSION}*" "llvm-devel-${LLVM_VERSION}*" "clang-devel-${LLVM_VERSION}*" "lldb-${LLVM_VERSION}*" gdb strace valgrind ltrace elfutils-devel nasm yasm; do \
         dnf -y install $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done \
     && dnf clean all \
