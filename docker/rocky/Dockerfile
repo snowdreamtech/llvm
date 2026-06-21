@@ -54,11 +54,8 @@ ENV KEEPALIVE=${KEEPALIVE} \
 
 # Additional tooling and configuration for LLVM image
 RUN set -eux \
-    && dnf makecache \
-    && dnf -y install epel-release \
-    && dnf -y config-manager --set-enabled crb \
-    && dnf makecache \
-    && dnf -y install \
+    && dnf -y --allowerasing update \
+    && dnf -y --allowerasing install \
     "llvm-${LLVM_VERSION}*" \
     "clang-${LLVM_VERSION}*" \
     cmake \
@@ -118,7 +115,7 @@ RUN set -eux \
     xz-devel \
     libzstd-devel \
     && for pkg in "clang-tools-extra-${LLVM_VERSION}*" "lld-${LLVM_VERSION}*" "compiler-rt-${LLVM_VERSION}*" "libcxx-devel-${LLVM_VERSION}*" "llvm-devel-${LLVM_VERSION}*" "clang-devel-${LLVM_VERSION}*" "lldb-${LLVM_VERSION}*" gdb strace valgrind ltrace elfutils-devel nasm yasm; do \
-        dnf -y install $pkg || echo "Package $pkg not available on this architecture, skipping."; \
+        dnf -y --allowerasing install $pkg || echo "Package $pkg not available on this architecture, skipping."; \
     done \
     && dnf clean all \
     && rm -rf /var/cache/dnf \
