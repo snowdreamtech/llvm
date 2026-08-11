@@ -1,7 +1,7 @@
 # LLVM Image (Debian Variant)
 # Extends snowdreamtech/debian with additional tooling and configuration.
 
-FROM ghcr.io/snowdreamtech/debian:13.5.0
+FROM ghcr.io/snowdreamtech/debian:13.6.0
 
 # Build-time Configuration
 ARG BUILDTIME \
@@ -26,19 +26,18 @@ ARG LLVM_VERSION=19.1.7
 # Standard OCI Metadata (https://github.com/opencontainers/image-spec)
 LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.title="LLVM Image Based On Debian" \
-    org.opencontainers.image.description="Docker Images for LLVM on Debian. (i386, amd64, arm32v5, arm32v7, arm64, riscv64, ppc64le, s390x)" \
+    org.opencontainers.image.description="Docker Images for LLVM on Debian. (amd64, arm32v7, arm64, ppc64le, riscv64, s390x)" \
     org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/llvm" \
-    org.opencontainers.image.base.name="snowdreamtech/debian:13.5.0" \
+    org.opencontainers.image.base.name="snowdreamtech/debian:13.6.0" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/llvm" \
     org.opencontainers.image.vendor="Snowdream Tech" \
+    org.opencontainers.image.version="${VERSION}" \
     org.opencontainers.image.created="${BUILDTIME}" \
     org.opencontainers.image.revision="${REVISION}" \
     org.opencontainers.image.url="https://github.com/snowdreamtech/llvm"
 
-# x-release-please-start-version
-LABEL org.opencontainers.image.version="${VERSION:-19.1.7}"
-# x-release-please-end
+
 
 # Runtime Environment Configuration
 ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND} \

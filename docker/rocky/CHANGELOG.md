@@ -7,9 +7,6 @@
 
 * use ghcr.io for base images to avoid rate limits ([9f1d73a](https://github.com/snowdreamtech/llvm/commit/9f1d73a75a61f2f368f5572c4bd28f4c92ef8fd5))
 
-
-### ♻️ Miscellaneous Chores
-
 * add 0-git-keep.sh to prevent empty entrypoint.d directories ([ce77247](https://github.com/snowdreamtech/llvm/commit/ce77247762becc1edf85ec7b57747d3f3127044a))
 * merge commit '099e99cb9e0a5dc0738f38403b3c025b0225f914' into dev ([0f9ca71](https://github.com/snowdreamtech/llvm/commit/0f9ca71aa7483261e25efb5f6f5047abd0d0519c))
 * release main ([4011a21](https://github.com/snowdreamtech/llvm/commit/4011a21a23395acc9545168c95ca0ec5c867e7d3))
@@ -20,4 +17,3 @@
 * **release:** deduplicate CHANGELOG headers ([3068d88](https://github.com/snowdreamtech/llvm/commit/3068d883bc6167773d046d3b2b0e4c479e4fee39))
 * **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/llvm/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
 * **speckit:** manual auto-commit trigger ([5f8a5a9](https://github.com/snowdreamtech/llvm/commit/5f8a5a9cba5d6bd42a65eaabfecd6e18b01aeeb0))
-

@@ -20,4 +20,3 @@
 * **release:** deduplicate CHANGELOG headers ([3068d88](https://github.com/snowdreamtech/llvm/commit/3068d883bc6167773d046d3b2b0e4c479e4fee39))
 * **release:** deduplicate CHANGELOG headers ([82be3d5](https://github.com/snowdreamtech/llvm/commit/82be3d5576b65b7f69b1a9afb8604f2c8f0e47f7))
 * **speckit:** manual auto-commit trigger ([5f8a5a9](https://github.com/snowdreamtech/llvm/commit/5f8a5a9cba5d6bd42a65eaabfecd6e18b01aeeb0))
-

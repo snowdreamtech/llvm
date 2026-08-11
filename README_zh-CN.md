@@ -45,9 +45,9 @@ docker run -d \
   snowdreamtech/llvm:debian
 ```
 
-**支持的架构**：i386、amd64、arm32v5、arm32v7、arm64、riscv64、ppc64le、s390x
+**支持架构**: amd64, arm32v7, arm64, ppc64le, riscv64, s390x
 
-**基础镜像**：`snowdreamtech/debian:13.5.0`
+**基础镜像**：`snowdreamtech/debian:latest`
 
 ### Alpine
 
@@ -63,7 +63,7 @@ docker run -d \
 
 **支持的架构**：i386、amd64、arm32v6、arm32v7、arm64、ppc64le、riscv64、s390x
 
-**基础镜像**：`snowdreamtech/alpine:3.24.1`
+**基础镜像**：`snowdreamtech/alpine:latest`
 
 ### Rocky
 
@@ -79,7 +79,7 @@ docker run -d \
 
 **支持的架构**：amd64、arm64、ppc64le、s390x
 
-**基础镜像**：`snowdreamtech/rocky:10.2.0`
+**基础镜像**：`snowdreamtech/rocky:latest`
 
 ## 构建说明
 
@@ -106,7 +106,7 @@ docker buildx create --use --name build --node build --driver-opt network=host
 
 # 为多个架构构建 Debian
 docker buildx build \
-  --platform=linux/386,linux/amd64,linux/arm/v5,linux/arm/v7,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x \
+  --platform=linux/amd64,linux/arm/v7,linux/arm64,linux/ppc64le,linux/riscv64,linux/s390x \
   -t snowdreamtech/llvm:debian \
   ./docker/debian/ \
   --push
@@ -217,7 +217,7 @@ services:
 
 此格式允许：
 
-- **完整版本固定**：`13.5.0-debian`（精确版本）
+- **完整版本固定**：`<version>-debian`（精确版本）
 - **变体最新标签**：`latest-debian`（跟踪 Debian 最新版本）
 - **全局最新标签**：`latest`（跟踪最新版本，默认指向 Debian）
 
@@ -227,7 +227,7 @@ services:
 
 | 变体 | 架构 |
 |---------|---------------|
-| **Debian** | i386、amd64、arm32v5、arm32v7、arm64、riscv64、ppc64le、s390x |
+| **Debian** | amd64, arm32v7, arm64, ppc64le, riscv64, s390x |
 | **Alpine** | i386、amd64、arm32v6、arm32v7、arm64、ppc64le、riscv64、s390x |
 | **Rocky** | amd64、arm64、ppc64le、s390x |
 
