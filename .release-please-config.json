@@ -17,7 +17,7 @@
       "release-type": "simple",
       "component": "debian",
       "include-component-in-tag": true,
-      "release-as": "19.1.7",
+      "release-as": "22.1.8",
       "changelog-path": "CHANGELOG.md",
       "exclude-paths": ["docker/debian/CHANGELOG.md"],
       "extra-files": [

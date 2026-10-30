@@ -1,7 +1,7 @@
 # LLVM Image (Alpine Variant)
 # Extends snowdreamtech/alpine with additional tooling and configuration.
 
-FROM ghcr.io/snowdreamtech/alpine:3.24.1
+FROM ghcr.io/snowdreamtech/alpine:3.24.3
 
 # Build-time Configuration
 ARG BUILDTIME \
@@ -27,7 +27,7 @@ LABEL org.opencontainers.image.authors="Snowdream Tech" \
     org.opencontainers.image.title="LLVM Image Based On Alpine" \
     org.opencontainers.image.description="Docker Images for LLVM on Alpine. (i386, amd64, arm32v6, arm32v7, arm64, ppc64le, riscv64, s390x)" \
     org.opencontainers.image.documentation="https://hub.docker.com/r/snowdreamtech/llvm" \
-    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.1" \
+    org.opencontainers.image.base.name="snowdreamtech/alpine:3.24.3" \
     org.opencontainers.image.licenses="MIT" \
     org.opencontainers.image.source="https://github.com/snowdreamtech/llvm" \
     org.opencontainers.image.vendor="Snowdream Tech" \

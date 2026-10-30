@@ -211,7 +211,7 @@ Images follow semantic versioning with the format: `{major}.{minor}.{patch}-{var
 
 Examples:
 
-- `snowdreamtech/llvm:19.1.7-debian`
+- `snowdreamtech/llvm:22.1.8-debian`
 - `snowdreamtech/llvm:22.1.3-alpine`
 - `snowdreamtech/llvm:21.1.8-rocky`
 
